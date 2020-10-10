@@ -1,0 +1,11 @@
+{
+  "defaultServerity": "error",
+  "extends": ["tslint:recommended", "tslint-react"],
+  "jsRules": {},
+  "rules": {
+    "object-literal-sort-key": false,
+    "member-ordering": false,
+    "jsx-no-lambda": false
+  },
+  "rulesDirectory": []
+}
