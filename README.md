@@ -1,10 +1,8 @@
 # google_search
 
-React application to use google and bind APIs to search and show elements
+React application to use google and bing APIs to search and show elements
 
-![](assets/demo.gif)
-
-A small project, build in React and Redux, to fetch and display results using google or bind APIs.
+A small project, build in React and Redux, to fetch and display results using google or bing APIs.
 
 This project was bootstrapped with [Create React App] (https://github.com/facebook/create-react-app).
 

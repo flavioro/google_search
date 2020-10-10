@@ -90,8 +90,6 @@ export const SearcherView = (props) => {
             onChange={onChangeSearcher}
           >
             <MenuItem value={GOOGLE}>Google</MenuItem>
-            <MenuItem value={BING}>Bing</MenuItem>
-            <MenuItem value={BOTH}>Both</MenuItem>
           </Select>
           <Button variant="contained" color="primary" onClick={onHandleSearch}>
             Search
