@@ -16,5 +16,5 @@ export interface IPropsResultList {
   /**
    * Handle to event change page
    */
-  onHandleChangePage?: (...args) => void;
+  onHandleChangePage: (...args) => void;
 }

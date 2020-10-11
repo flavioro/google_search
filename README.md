@@ -1,8 +1,22 @@
 # google_search
 
+![](assets/demo.gif)
+
 React application to use google and bing APIs to search and show elements
 
 A small project, build in React and Redux, to fetch and display results using google or bing APIs.
+
+To generate the certificates to use custom search instances i used the next steps:
+
+Google:
+
+1. Go to https://cse.google.com/all
+2. Select your search engine or Create one and go into that
+3. You can find the CX id titled as "Search engine ID"
+4. Public URL also has the cx id in the Query param as ?cx=\*\*
+
+Bing:
+Follow the next instrucctions: (https://docs.microsoft.com/en-us/azure/cognitive-services/bing-custom-search/quick-start)
 
 This project was bootstrapped with [Create React App] (https://github.com/facebook/create-react-app).
 

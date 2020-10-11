@@ -10,6 +10,7 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import ResultList from "../shared/ResultList.container";
+import { ITEM_PER_PAGE, PREFIX_GOOGLE, PREFIX_BING } from "../constants";
 
 const useStyles = makeStyles((theme) => ({
   conteiner: {
@@ -71,6 +72,22 @@ export const SearcherView = (props) => {
     }
   };
 
+  const onHandleChangePage = (searcherType: string, direction: string) => {
+    if (searcherType === PREFIX_GOOGLE) {
+      const googlePage =
+        direction === "next"
+          ? props.googleResults.page + 1
+          : props.googleResults.page - 1;
+      props.onGoogleSearch(searchValue, googlePage);
+    } else {
+      const bingPage =
+        direction === "next"
+          ? props.bingResults.page + 1
+          : props.bingResults.page - 1;
+      props.onBingSearch(searchValue, bingPage);
+    }
+  };
+
   return (
     <Container maxWidth="md" className={classes.conteiner}>
       <Grid container={true} className={classes.grid} spacing={2}>
@@ -90,30 +107,42 @@ export const SearcherView = (props) => {
             onChange={onChangeSearcher}
           >
             <MenuItem value={GOOGLE}>Google</MenuItem>
+            <MenuItem value={BING}>Bing</MenuItem>
+            <MenuItem value={BOTH}>Both</MenuItem>
           </Select>
           <Button variant="contained" color="primary" onClick={onHandleSearch}>
             Search
           </Button>
         </Grid>
 
-        <Grid item={true} xs={12} className={classes.listCont}>
-          <Paper>
-            <ResultList
-              title={"Google results"}
-              results={props.googleResults}
-              prefixIndex={"G"}
-            />
-          </Paper>
-        </Grid>
-        <Grid item={true} xs={12} className={classes.listCont}>
-          <Paper>
-            <ResultList
-              title={"Bing results"}
-              results={props.bingResults}
-              prefixIndex={"B"}
-            />
-          </Paper>
-        </Grid>
+        {props.googleResults &&
+          (props.googleResults.loading ||
+            props.googleResults.itemsCount > 0) && (
+            <Grid item={true} xs={12} className={classes.listCont}>
+              <Paper>
+                <ResultList
+                  title={"Google results"}
+                  results={props.googleResults}
+                  prefixIndex={PREFIX_GOOGLE}
+                  onHandleChangePage={onHandleChangePage}
+                />
+              </Paper>
+            </Grid>
+          )}
+        {props.bingResults &&
+          (props.bingResults.loading ||
+            props.bingResults.itemsCount > ITEM_PER_PAGE) && (
+            <Grid item={true} xs={12} className={classes.listCont}>
+              <Paper>
+                <ResultList
+                  title={"Bing results"}
+                  results={props.bingResults}
+                  prefixIndex={PREFIX_BING}
+                  onHandleChangePage={onHandleChangePage}
+                />
+              </Paper>
+            </Grid>
+          )}
       </Grid>
     </Container>
   );

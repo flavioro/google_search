@@ -20,10 +20,16 @@ interface SearchGoogleEnd {
   response: any;
 }
 
+interface SearchBingEnd {
+  type: typeof SEARCH_BING_END;
+  response: any;
+}
+
 export type ActionsTypes =
   | SearchGoogleStart
   | SearchBingStart
-  | SearchGoogleEnd;
+  | SearchGoogleEnd
+  | SearchBingEnd;
 
 export interface IState {
   currentSearchValue: string;

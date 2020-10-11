@@ -2,6 +2,7 @@ import {
   SEARCH_GOOGLE_START,
   SEARCH_BING_START,
   SEARCH_GOOGLE_END,
+  SEARCH_BING_END,
   ActionsTypes,
   IState,
 } from "../actions/types";
@@ -35,6 +36,7 @@ export const mainReducer = (
         currentSearchValue: action.searchValue,
         googleResults: {
           ...state.googleResults,
+          data: [],
           loading: true,
           page: action.page,
         },
@@ -46,6 +48,7 @@ export const mainReducer = (
         currentSearchValue: action.searchValue,
         bingResults: {
           ...state.bingResults,
+          data: [],
           loading: true,
           page: action.page,
         },
@@ -75,6 +78,33 @@ export const mainReducer = (
       return {
         ...state,
         googleResults,
+      };
+    }
+    case SEARCH_BING_END: {
+      let bingResults = {};
+
+      if (action.response === "error") {
+        bingResults = Object.assign({}, state.bingResults, {
+          data: [],
+          itemsCount: 0,
+          error: action.response,
+          page: state.bingResults.page,
+          loading: false,
+        });
+      } else {
+        const webPages = action.response.data.webPages;
+        bingResults = Object.assign({}, state.bingResults, {
+          data: webPages.value,
+          itemsCount: webPages.totalEstimatedMatches,
+          error: "",
+          page: state.bingResults.page,
+          loading: false,
+        });
+      }
+
+      return {
+        ...state,
+        bingResults,
       };
     }
     default: {
