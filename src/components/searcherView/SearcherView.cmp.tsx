@@ -40,13 +40,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const GOOGLE = "GOOGLE";
-const BING = "BING";
-const BOTH = "BOTH";
+enum Searchers {
+  GOOGLE = "GOOGLE",
+  BING = "BING",
+  BOTH = "BOTH",
+}
 
 export const SearcherView = (props) => {
   const classes = useStyles();
-  const [searcher, setSearcher] = useState(GOOGLE);
+  const [searcher, setSearcher] = useState(Searchers.GOOGLE);
   const [searchValue, setSearchValue] = useState("");
 
   const onChangeSearcher = (event) => setSearcher(event.target.value);
@@ -57,14 +59,14 @@ export const SearcherView = (props) => {
     if (searchValue.trim() === "") return;
 
     switch (searcher) {
-      case BOTH:
+      case Searchers.BOTH:
         props.onGoogleSearch(searchValue);
         props.onBingSearch(searchValue);
         break;
-      case BING:
+      case Searchers.BING:
         props.onBingSearch(searchValue);
         break;
-      case GOOGLE:
+      case Searchers.GOOGLE:
         props.onGoogleSearch(searchValue);
         break;
       default:
@@ -106,9 +108,9 @@ export const SearcherView = (props) => {
             value={searcher}
             onChange={onChangeSearcher}
           >
-            <MenuItem value={GOOGLE}>Google</MenuItem>
-            <MenuItem value={BING}>Bing</MenuItem>
-            <MenuItem value={BOTH}>Both</MenuItem>
+            <MenuItem value={Searchers.GOOGLE}>Google</MenuItem>
+            <MenuItem value={Searchers.BING}>Bing</MenuItem>
+            <MenuItem value={Searchers.BOTH}>Both</MenuItem>
           </Select>
           <Button variant="contained" color="primary" onClick={onHandleSearch}>
             Search

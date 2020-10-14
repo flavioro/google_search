@@ -23,13 +23,16 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "space-around",
   },
+  contTitle: {
+    padding: "10px",
+  },
 }));
 
 export const ResultList = (props: IPropsResultList) => {
   const classes = useStyles();
   return (
     <React.Fragment>
-      <h3 style={{ padding: "10px" }}>
+      <h3 className={classes.contTitle}>
         {props.title}: {props.results?.itemsCount}
       </h3>
 
